@@ -1,0 +1,45 @@
+{
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "plugins": ["standard", "promise", "react", "babel"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    }
+  },
+  "rules": {
+    "semi": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "brace-style": ["error", "stroustrup"],
+    "template-tag-spacing": ["error", "never"],
+    "comma-dangle": [
+      "error",
+      {
+        "functions": "never",
+        "arrays": "always-multiline",
+        "objects": "always-multiline"
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "import/first": "error",
+    "import/named": "error",
+    "import/default": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "React": true
+  }
+}

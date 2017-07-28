@@ -1,0 +1,50 @@
+{
+  "name": "electron-next-typescript",
+  "productName": "ElectronNextTS",
+  "description": "Using Typescript and Next.js to build an Electron app",
+  "author": "John Lombardo <john@meerkats.com.au>",
+  "version": "1.0.0",
+  "main": "build/main/index.js",
+  "scripts": {
+    "prestart": "tsc",
+    "start": "concurrently \"tsc --watch\" \"electron .\"",
+    "prebuild": "tsc && cpx renderer/next.config.js build/renderer",
+    "build": "next build build/renderer && next export build/renderer",
+    "predist": "rimraf -r build -r dist",
+    "dist": "npm run build && build --dir",
+    "postdist": "rimraf -r build && open dist/mac"
+  },
+  "build": {
+    "asar": false,
+    "extraResources": [
+      {
+        "from": "build/renderer/out",
+        "to": "app/build/renderer"
+      },
+      {
+        "from": "build/main",
+        "to": "app/build/main"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.17",
+    "@types/react": "^15.0.39",
+    "asar": "^0.13.0",
+    "concurrently": "^3.5.0",
+    "cpx": "^1.5.0",
+    "electron": "1.6.2",
+    "electron-builder": "19.16.0",
+    "next": "3.0.1-beta.15",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.5.0",
+    "tslint-config-prettier": "^1.1.0",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "electron-is-dev": "0.2.0",
+    "electron-next": "3.0.7"
+  }
+}

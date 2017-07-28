@@ -1,0 +1,14 @@
+# build output
+dist
+build
+renderer/.next
+renderer/out
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+.DS_Store
+git
