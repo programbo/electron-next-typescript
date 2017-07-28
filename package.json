@@ -4,26 +4,29 @@
   "description": "Using Typescript and Next.js to build an Electron app",
   "author": "John Lombardo <john@meerkats.com.au>",
   "version": "1.0.0",
-  "main": "build/main/index.js",
+  "main": "main/index.js",
   "scripts": {
-    "prestart": "tsc",
-    "start": "concurrently \"tsc --watch\" \"electron .\"",
-    "prebuild": "tsc && cpx renderer/next.config.js build/renderer",
+    "prestart": "tsc && cpx renderer/next.config.js build/renderer && cpx package.json build",
+    "start": "concurrently \"tsc --watch\" \"electron ./build\"",
+    "prebuild": "npm run prestart",
     "build": "next build build/renderer && next export build/renderer",
-    "predist": "rimraf -r build -r dist",
-    "dist": "npm run build && build --dir",
-    "postdist": "rimraf -r build && open dist/mac"
+    "predist": "rimraf build dist",
+    "dist": "npm run build && build --dir --project build",
+    "postdist": "rimraf build && open dist/mac"
   },
   "build": {
     "asar": false,
+    "directories": {
+      "output": "../dist"
+    },
     "extraResources": [
       {
-        "from": "build/renderer/out",
-        "to": "app/build/renderer"
+        "from": "renderer/out",
+        "to": "app/renderer"
       },
       {
-        "from": "build/main",
-        "to": "app/build/main"
+        "from": "main",
+        "to": "app/main"
       }
     ]
   },
